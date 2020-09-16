@@ -8,6 +8,9 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         self.send_response(HTTPStatus.OK)
         self.end_headers()
         self.wfile.write(b'Hello world')
+        hostname = socket.gethostname()
+        local_ip = socket.gethostbyname(hostname)
+        self.wfile.write(local_ip)
 
 
 httpd = socketserver.TCPServer(('', 8000), Handler)
